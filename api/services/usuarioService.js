@@ -57,7 +57,7 @@ class UsuarioService {
                 throw new Error('Usuário não encontrado!')
             }
 
-            return usuario;
+            return usuario
         } catch (error) {
             throw error
         }

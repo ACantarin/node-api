@@ -8,10 +8,7 @@ class UsuarioController {
 
         try {
             const usuario = await usuarioService.cadastrar({ nome, email, senha })
-            
-            res.status(201).json(usuario)
-
-            return usuario
+            return res.status(201).json(usuario)
         } catch (error) {
             res.status(400).send({ message: error.message })
         }
@@ -20,7 +17,6 @@ class UsuarioController {
     static async listar(req, res) {
         try {
             const usuarios = await usuarioService.listar()
-            
             res.status(200).json(usuarios)
         } catch (error) {
             res.status(error).send({ message: error.message })
@@ -32,7 +28,6 @@ class UsuarioController {
 
         try {
             const usuario = await usuarioService.buscar(id)
-            
             res.status(200).json(usuario)
         } catch (error) {
             res.status(400).send({ message: error.message })
@@ -45,7 +40,6 @@ class UsuarioController {
 
         try {
             const usuario = await usuarioService.atualizar(id, { nome, email, senha })
-            
             res.status(200).json(usuario)
         } catch (error) {
             res.status(400).send({ message: error.message })
@@ -57,7 +51,6 @@ class UsuarioController {
 
         try {
             await usuarioService.deletar(id)
-            
             res.status(200).send({ message: 'Usuário deletado com sucesso!' })
         } catch (error) {
             res.status(400).send({ message: error.message })
