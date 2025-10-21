@@ -31,7 +31,9 @@ class UsuarioService {
 
     async listar() {
         try {
-            const usuarios = await database.usuarios.findAll()
+            const usuarios = await database.usuarios.findAll({
+                attributes: ['id', 'nome', 'email']
+            })
 
             if (!usuarios) {
                 throw new Error('Nenhum usuário cadastrado')
