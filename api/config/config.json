@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "328457Rc@!",
+    "password": "Root@2025",
     "database": "node_api",
     "host": "localhost",
     "dialect": "postgres"
