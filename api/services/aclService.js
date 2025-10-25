@@ -64,6 +64,49 @@ class AclService {
 
         return novoUsuario
     }
+
+    async cadastrarPermissoesRoles(dto) {
+        const role = await database.roles.findOne({
+            include: [
+                {
+                    model: database.permissoes,
+                    as: 'roles_permissoes',
+                    attributes: ['id', 'nome', 'descricao'],
+                }
+            ]
+        })
+
+        if (!role) {
+            throw new Error('Perfil não encontrado!')
+        }
+
+        const permissoes = await database.permissoes.findAll({
+            where: {
+                id: {
+                    [Sequelize.Op.in]: dto.permissoes
+                }
+            }
+        })
+
+        await role.removeRoles_permissoes(role.roles_permissoes)
+
+        await role.addRoles_permissoes(permissoes)
+
+        const novaRole = await database.roles.findOne({
+            include: [
+                {
+                    model: database.permissoes,
+                    as: 'roles_permissoes',
+                    attributes: ['id', 'nome', 'descricao'],
+                }
+            ],
+            where: {
+                id: dto.roleId
+            }
+        })
+
+        return novaRole
+    }
 }
 
 module.exports = AclService

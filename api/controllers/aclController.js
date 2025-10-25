@@ -14,6 +14,17 @@ class AclController {
             res.status(400).send({ message: error.message })
         }
     }
+
+    static async cadastrarPermissoesRoles(req, res) {
+        const { roleId, permissoes } = req.body
+        
+        try {
+            const permissoesRole = await aclService.cadastrarPermissoesRoles({ roleId, permissoes })
+            return res.status(201).json(permissoesRole)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    }
 }
 
 module.exports = AclController
