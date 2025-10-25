@@ -4,8 +4,7 @@ const aclService = new AclService()
 
 class AclController {
     static async cadastrar(req, res) {
-        const { roles, permissoes } = req.body
-        const { usuarioId } = req
+        const { usuarioId, roles, permissoes } = req.body
         
         try {
             const acl = await aclService.cadastrar({ roles, permissoes, usuarioId })

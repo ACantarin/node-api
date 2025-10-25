@@ -59,7 +59,10 @@ class AclService {
                     as: 'usuario_permissoes',
                     attributes: ['id', 'nome', 'descricao'],
                 }              
-            ]
+            ],
+            where: {
+                id: dto.usuarioId
+            }
         })
 
         return novoUsuario
